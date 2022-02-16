@@ -29,7 +29,12 @@ func Random0ToInt(max int) (int, error) {
 	return int(preRand.Int64()), nil
 }
 
+//Rand0ToFloat64 return a number from min to max and return 0 if min > max
 func Rand0ToFloat64(min, max float64) float64 {
+	if min > max {
+		return 0
+	}
+
 	rand.Seed(time.Now().UnixNano())
 	return (min + rand.Float64()*(max-min))
 }
