@@ -11,20 +11,19 @@ type RateUnit struct {
 }
 
 type RarityConfig struct {
-	Rates []RateUnit
 }
 
-func RandomWithRarities(rateUnits RarityConfig, result interface{}) error {
+func RandomWithRarities(rateUnits []RateUnit, result interface{}) error {
 
 	var totalRate float64 = 0
-	for _, rate := range rateUnits.Rates {
+	for _, rate := range rateUnits {
 		totalRate += rate.Rate
 	}
 
 	randNum := Rand0ToFloat64(0, totalRate)
 
 	var lastValue interface{} = nil
-	for _, v := range rateUnits.Rates {
+	for _, v := range rateUnits {
 		var percent float64 = v.Rate
 		if percent > 0 {
 			lastValue = v.Value
