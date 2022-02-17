@@ -1,6 +1,7 @@
 package mathfunc
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 )
@@ -14,6 +15,9 @@ type RarityConfig struct {
 }
 
 func RandomWithRarities(rateUnits []RateUnit, result interface{}) error {
+	if len(rateUnits) <= 0 {
+		return errors.New("cannot rate pick the empty array")
+	}
 
 	var totalRate float64 = 0
 	for _, rate := range rateUnits {
@@ -33,6 +37,10 @@ func RandomWithRarities(rateUnits []RateUnit, result interface{}) error {
 				break
 			}
 		}
+	}
+
+	if lastValue == nil {
+		return errors.New("something wrong with rateUnits array")
 	}
 
 	resultsVal := reflect.ValueOf(result)
