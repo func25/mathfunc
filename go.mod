@@ -1,3 +1,3 @@
 module github.com/func25/mathfunc
 
-go 1.17
+go 1.18

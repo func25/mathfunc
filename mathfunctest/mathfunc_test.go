@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/func25/mathfunc/mathfunc"
+	"github.com/func25/mathfunc"
 )
 
 func TestRandRates(t *testing.T) {
@@ -42,4 +42,58 @@ func TestRandRates(t *testing.T) {
 	}
 
 	fmt.Println(quantity)
+}
+
+type abc struct {
+	a, b, c mathfunc.BitmaskUInt
+}
+
+func TestMe(t *testing.T) {
+	fmt.Println(1 & -2)
+}
+
+func TestBitwise(t *testing.T) {
+	turnOnTable := []abc{
+		{2, 1, 3},
+		{89, 20, 93},
+	}
+	t.Run("turn on", func(t *testing.T) {
+		for _, v := range turnOnTable {
+			if v.a.TurnOn(v.b) != v.c {
+				t.Error(fmt.Sprintf("turn on failed case: %v", v))
+			}
+		}
+	})
+
+	turnOffTable := []abc{
+		{2, 1, 2},
+		{2, 2, 0},
+		{89, 20, 73},
+	}
+	t.Run("turn off", func(t *testing.T) {
+		for _, v := range turnOffTable {
+			if v.a.TurnOff(v.b) != v.c {
+				t.Error(fmt.Sprintf("turn on failed case: %v", v))
+			}
+		}
+	})
+
+	hasTable := []abc{
+		{2, 1, 0},
+		{3, 1, 1},
+		{3, 2, 1},
+		{45, 36, 1},
+		{45, 35, 0},
+	}
+	t.Run("turn off", func(t *testing.T) {
+		for _, v := range hasTable {
+			res := true
+			if v.c == 0 {
+				res = false
+			}
+			if v.a.Has(v.b) != res {
+				t.Error(fmt.Sprintf("turn on failed case: %v", v))
+			}
+		}
+	})
 }

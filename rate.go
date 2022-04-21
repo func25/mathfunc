@@ -11,9 +11,6 @@ type RateUnit struct {
 	Rate  float64
 }
 
-type RarityConfig struct {
-}
-
 func RandomWithRarities(rateUnits []RateUnit, result interface{}) error {
 	if len(rateUnits) <= 0 {
 		return errors.New("cannot rate pick the empty array")
